@@ -3,9 +3,7 @@ module StreamMacros
 import StaticArrays
 const SA = StaticArrays
 
-import ModelingToolkit
-using ModelingToolkit: Variable, Differential, simplified_expr,
-      expand_derivatives, Expression, Operation, Constant
+import SymEngine
 
 import DiffEqBase 
 const ODE=DiffEqBase
