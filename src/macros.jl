@@ -141,7 +141,7 @@ macro var_velo_from_stream(H::Symbol, formulas::Expr)
 
                 # current
                 X = SA.SMatrix{2,2}(u[1, 2], u[2, 2], u[1, 3], u[2, 3])
-                DV = SMatrix{2,2}(
+                DV = SA.SMatrix{2,2}(
                     $(DV[1, 1]),
                     $(DV[2, 1]),
                     $(DV[1, 2]),
