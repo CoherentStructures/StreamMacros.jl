@@ -49,5 +49,13 @@ using Test
 
     @test StreamMacros.expr_diff(:(x^2 + sin(x) + y), :x) == :(2x + cos(x))
 
-    # Write your own tests here.
+    @define_stream test_stream begin
+        test_stream = x^2 + y^2
+    end
+
+    t1 = @var_velo_from_stream test_stream
+    t2 = @velo_from_stream test_stream
+    @test t1 isa ODEFunction
+    @test t2 isa ODEFunction
+
 end
