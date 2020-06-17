@@ -1,5 +1,8 @@
 # StreamMacros.jl
+
 [![Build Status](https://travis-ci.org/CoherentStructures/StreamMacros.jl.svg?branch=master)](https://travis-ci.org/CoherentStructures/StreamMacros.jl)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://coherentstructures.github.io/StreamMacros.jl/stable/)
+[![Dev](https://img.shields.io/badge/docs-latest-blue.svg)](http://coherentstructures.github.io/StreamMacros.jl/latest/)
 
 Provides some convenience macros for defining velocity fields via their stream function.
 
@@ -11,7 +14,7 @@ Install by typing
 in the Julia REPL.
 
 # Examples
-The basic  usage pattern is
+The basic usage pattern is
 
 ```julia
 output = @velo_from_stream <stream_name> begin
@@ -26,7 +29,7 @@ as in e.g.
 using StreamMacros
 
 vortex = @velo_from_stream stream begin
-	stream = x^2 + y^2 + perturbation(x,y,t)
-	perturbation(x,y,t) = sin(t) * y
+	stream = x^2 + y^2 + perturbation(x, y, t)
+	perturbation(x, y, t) = sin(t) * y
 end
 ```
