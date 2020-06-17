@@ -35,4 +35,3 @@ rot_double_gyre = @velo_from_stream Ψ_rot_dgyre
 rot_double_gyre! = ODE.ODEFunction{true}((du, u, p, t) -> du .= rot_double_gyre(u, p, t))
 rot_double_gyreEqVari = @var_velo_from_stream Ψ_rot_dgyre
 rot_double_gyreEqVari! = ODE.ODEFunction{true}((DU, U, p, t) -> DU .= rot_double_gyreEqVari(U, p, t))
-ylinder_flow = ODE.ODEFunction{false}(_cylinder_flow)
