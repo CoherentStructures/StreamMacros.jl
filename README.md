@@ -18,9 +18,9 @@ The basic usage pattern is
 
 ```julia
 output = @velo_from_stream <stream_name> begin
-		 		<stream_name> = ...
-		 		# additional definitions
-		   end
+    <stream_name> = ...
+   	# additional definitions
+end
 ```
 
 as in e.g.
@@ -29,7 +29,7 @@ as in e.g.
 using StreamMacros
 
 vortex = @velo_from_stream stream begin
-	stream = x^2 + y^2 + perturbation(x, y, t)
-	perturbation(x, y, t) = sin(t) * y
+    stream = x^2 + y^2 + perturbation(x, y, t)
+    perturbation(x, y, t) = sin(t) * y
 end
 ```
