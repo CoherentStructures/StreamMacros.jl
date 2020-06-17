@@ -6,7 +6,7 @@ Provides some convenience macros for defining velocity fields via their stream f
 # Installation
 Install by typing
 
-		]add https://github.com/CoherentStructures/StreamMacros.jl
+    ]add https://github.com/CoherentStructures/StreamMacros.jl
 
 in the Julia REPL.
 
