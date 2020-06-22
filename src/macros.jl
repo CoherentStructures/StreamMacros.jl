@@ -34,13 +34,13 @@ end
 """
     @velo_from_stream(name::Symbol, [code::Expr])
 
-Get the velocity field corresponding to a stream function on ``R^2``. The defining
-code can be a series of definitions (in an enclosing `begin ... end`-block and
-is treated as a series of symbolic substitutions. Starting from the symbol
-`name`, substitutions are performed until the resulting expression only depends
-on `x`, `y` and `t`.
+Get the velocity field corresponding to a stream function on ``\\mathbb{R}^2``.
+The defining code can be a series of definitions (in an enclosing
+`begin ... end`-block and is treated as a series of symbolic substitutions.
+Starting from the symbol `name`, substitutions are performed until the resulting
+expression only depends on `x`, `y` and `t`.
 
-The macro returns an anonymous function with signature `(u,p,t)` that returns an
+The macro returns an `ODEFunction` with signature `(u, p, t)` that returns an
 `SVector{2}` corresponding to the vector field at position `u` at time `t`. The
 parameter slot is not used and can be filled with `nothing` when calling.
 
@@ -106,12 +106,12 @@ end
     @var_velo_from_stream(name::Symbol, [code::Expr])
 
 Get the (state and tangent space) velocity field corresponding to a stream
-function on ``R^2``. The defining code can be a series of definitions (in an
-enclosing `begin ... end`-block and is treated as a series of symbolic
+function on ``\\mathbb{R}^2``. The defining code can be a series of definitions
+(in an enclosing `begin ... end`-block and is treated as a series of symbolic
 substitutions. Starting from the symbol `name`, substitutions are performed
 until the resulting expression only depends on `x`, `y` and `t`.
 
-The macro returns an anonymous function with signature `(U,p,t)` that returns an
+The macro returns an `ODEFunction` with signature `(U,p,t)` that returns an
 `SMatrix{2,3}`: in the first column, one has the usual velocity, in the second
 to third column, one has the linearized velocity, both at position `u = U[:,1]`
 at time `t`. The parameter slot is not used and can be filled with `nothing`
@@ -171,12 +171,12 @@ end
     @vorticity_from_stream(name::Symbol, [code::Expr])
 
 Get the vorticity field as a function of `(x, y, t)` corresponding to a stream
-function on ``R^2``.
+function on ``\\mathbb{R}^2``.
 
 !!! note "Sign convention"
     The vorticity ``\\omega`` of the velocity field ``v = (v_x, v_y)`` is defined
     as derived from the stream function ``\\psi`` by ``\\omega = \\partial_x v_x -
-    \\partial_y v_y) = trace(\\nabla^2\\psi)``, i.e., the trace of the Hessian of
+    \\partial_y v_y = tr(\\nabla^2\\psi)``, i.e., the trace of the Hessian of
     the stream function.
 """
 macro vorticity_from_stream(H::Symbol, formulas::Expr)
