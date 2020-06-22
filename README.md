@@ -1,10 +1,9 @@
 # StreamMacros.jl
 
-[![Build Status](https://travis-ci.org/CoherentStructures/StreamMacros.jl.svg?branch=master)](https://travis-ci.org/CoherentStructures/StreamMacros.jl)
+[![build status](https://travis-ci.org/CoherentStructures/StreamMacros.jl.svg?branch=master)](https://travis-ci.org/CoherentStructures/StreamMacros.jl)
 [![codecov.io](http://codecov.io/github/CoherentStructures/StreamMacros.jl/coverage.svg?branch=master)](http://codecov.io/github/CoherentStructures/StreamMacros.jl?branch=master)
-[![coveralls.io](https://coveralls.io/repos/github/CoherentStructures/StreamMacros.jl/badge.svg?branch=master)](https://coveralls.io/github/CoherentStructures/StreamMacros.jl?branch=master)
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://coherentstructures.github.io/StreamMacros.jl/stable/)
-[![Dev](https://img.shields.io/badge/docs-latest-blue.svg)](http://coherentstructures.github.io/StreamMacros.jl/latest/)
+[![stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://coherentstructures.github.io/StreamMacros.jl/stable)
+[![dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://coherentstructures.github.io/StreamMacros.jl/dev)
 
 Provides some convenience macros for defining velocity fields via their stream function.
 
