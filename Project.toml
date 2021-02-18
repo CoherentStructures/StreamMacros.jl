@@ -1,7 +1,7 @@
 name = "StreamMacros"
 uuid = "1418a599-1564-4a75-98e9-b890cf8b552f"
 authors = ["Alvaro de Diego"]
-version = "0.1.0"
+version = "0.1.2"
 
 [deps]
 DiffEqBase = "2b5f629d-d688-5b77-993f-72d75c75574e"
