@@ -1,7 +1,7 @@
 name = "StreamMacros"
 uuid = "1418a599-1564-4a75-98e9-b890cf8b552f"
-authors = ["Alvaro de Diego"]
-version = "0.1.2"
+authors = ["Alvaro de Diego", "Daniel Karrasch"]
+version = "0.2.0"
 
 [deps]
 DiffEqBase = "2b5f629d-d688-5b77-993f-72d75c75574e"
@@ -15,7 +15,8 @@ SymEngine = "0.6, 0.7, 0.8"
 julia = "1"
 
 [extras]
+InteractiveUtils = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["InteractiveUtils", "Test"]
