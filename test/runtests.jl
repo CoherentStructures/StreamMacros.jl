@@ -30,7 +30,7 @@ using Test
     @test bickley! isa ODEFunction{true}
     @test bickley(SVector(0.0,0.0), nothing, 0.0) isa SVector
     @test bickley(SVector(0.0,0.0), nothing, 0.0) == bickley!(ones(2), [0.0, 0.0], nothing, 0.0)
-    @test iszero(@allocated bickley!(du, u, nothing, t))
+    VERSION ≥ v"1.1" && @test iszero(@allocated bickley!(du, u, nothing, t))
 
     bickley2 = @var_velo_from_stream bstream
     bickley2! = @var_velo!_from_stream bstream
@@ -38,7 +38,7 @@ using Test
     @test bickley2! isa ODEFunction{true}
     @test (bickley2(SMatrix{2,3}(0.0,0.0,0.0,0.0,0.0,0.0), nothing, 0.0) isa SMatrix{2,3})
     @test bickley2(SMatrix{2,3}(0.0,0.0,0.0,0.0,0.0,0.0), nothing, 0.0) == bickley2!(ones(2,3), zeros(2,3), nothing, 0.0)
-    @test iszero(@allocated bickley2!(DU, U, nothing, t))
+    VERSION ≥ v"1.1" && @test iszero(@allocated bickley2!(DU, U, nothing, t))
 
     @test StreamMacros.expr_diff(:(x^2 + sin(x) + y), :x) == :(2x + cos(x))
 
@@ -66,7 +66,7 @@ using Test
     rot_double_gyre = @velo_from_stream Ψ_rot_dgyre
     rot_double_gyre! = @velo!_from_stream Ψ_rot_dgyre
     @test rot_double_gyre(SVector{2}(0.0,0.0), nothing, 0.0) == rot_double_gyre!(ones(2), zeros(2), nothing, 0.0)
-    @test iszero(@allocated rot_double_gyre!(du, u, nothing, t))
+    VERSION ≥ v"1.1" && @test iszero(@allocated rot_double_gyre!(du, u, nothing, t))
 
     dgyrepast = @velo_from_stream Ψ_P begin
         Ψ_P = sin(2π*x)*sin(π*y)
