@@ -403,10 +403,6 @@ simple_simplifier(expr) = expr
 
 
 expr_grad(expr, coord_vars::Vector{Symbol}) = expr_diff.(expr, coord_vars)
-function hessian(expr, coord_vars)
-    ∇expr = expr_grad(expr, coord_vars)
-    ∇²expr = expr_grad(expr)
-end
 
 ####t####################################################################################
 #                 Functions for symbolic manipulation of expressions                    #
