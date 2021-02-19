@@ -1,30 +1,34 @@
 # StreamMacros.jl
 
-[![build status](https://travis-ci.org/CoherentStructures/StreamMacros.jl.svg?branch=master)](https://travis-ci.org/CoherentStructures/StreamMacros.jl)
-[![codecov.io](http://codecov.io/github/CoherentStructures/StreamMacros.jl/coverage.svg?branch=master)](http://codecov.io/github/CoherentStructures/StreamMacros.jl?branch=master)
-[![stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://coherentstructures.github.io/StreamMacros.jl/stable)
-[![dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://coherentstructures.github.io/StreamMacros.jl/dev)
+*Convenience macros for defining velocity fields via their stream function.*
 
-Provides some convenience macros for defining velocity fields via their stream function.
+[![build status](https://github.com/CoherentStructures/StreamMacros.jl/workflows/CI/badge.svg?branch=master)](https://github.com/CoherentStructures/StreamMacros.jl/actions?query=workflow%3ACI)
+[![code coverage](http://codecov.io/github/CoherentStructures/StreamMacros.jl/coverage.svg?branch=master)](http://codecov.io/github/CoherentStructures/StreamMacros.jl?branch=master)
+[![stable docs](https://img.shields.io/badge/docs-stable-blue.svg)](https://coherentstructures.github.io/StreamMacros.jl/stable)
+[![dev docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://coherentstructures.github.io/StreamMacros.jl/dev)
 
-# Installation
+## Installation
+
 Install by typing
 
-    ]add https://github.com/CoherentStructures/StreamMacros.jl
+```julia
+]add https://github.com/CoherentStructures/StreamMacros.jl.git
+```
 
 in the Julia REPL.
 
-# Examples
+## Examples
+
 The basic usage pattern is
 
 ```julia
 output = @velo_from_stream <stream_name> begin
     <stream_name> = ...
-   	# additional definitions
+    # additional definitions
 end
 ```
 
-as in e.g.
+as in
 
 ```julia
 using StreamMacros

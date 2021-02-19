@@ -103,6 +103,31 @@ macro velo_from_stream(name::Symbol)
 end
 
 """
+    @velo!_from_stream(name::Symbol, [code::Expr])
+
+Same as [`@velo_from_stream`](@ref), but returns the in-place version of the velocity field.
+"""
+macro velo!_from_stream(H::Symbol, formulas::Expr)
+    V, _ = streamline_derivatives(H, formulas)
+    V = sym_subst.(V, [[:x, :y, :p]], [[:(u[1]), :(u[2]), :(p[1])]])
+    quote
+        ODE.ODEFunction{true}(
+            (du, u, p, t) -> begin
+                du[1] = $(V[1])
+                du[2] = $(V[2])
+                return du
+            end,
+        )
+    end
+end
+macro velo!_from_stream(name::Symbol)
+    haskey(stream_dict, name) || (@error "stream $name not defined")
+    quote
+        @velo!_from_stream $name $(stream_dict[name])
+    end
+end
+
+"""
     @var_velo_from_stream(name::Symbol, [code::Expr])
 
 Get the (state and tangent space) velocity field corresponding to a stream
@@ -164,6 +189,43 @@ macro var_velo_from_stream(name::Symbol)
     haskey(stream_dict, name) || (@error "stream $name not defined")
     quote
         @var_velo_from_stream $(name) $(stream_dict[name])
+    end
+end
+
+"""
+    @var_velo!_from_stream(name::Symbol, [code::Expr])
+
+Same as [`@var_velo_from_stream`](@ref), but returns the in-place version of the (extended)
+velocity field.
+"""
+macro var_velo!_from_stream(H::Symbol, formulas::Expr)
+    V, DV = streamline_derivatives(H, formulas)
+
+    # substitute :x and :y by access to the first column of a matrix u
+    V = sym_subst.(V, [[:x, :y, :p]], [[:(u[1, 1]), :(u[2, 1]), :(p[1])]])
+    DV = sym_subst.(DV, [[:x, :y, :p]], [[:(u[1, 1]), :(u[2, 1]), :(p[1])]])
+
+    quote
+        ODE.ODEFunction{true}(
+            (du, u, p, t) -> begin
+                # take as input a 2x3 matrix which is interpreted in the following way:
+                # [ x[1] X[1,1] X[1,2]
+                #   x[2] X[2,1] X[2,2] ]
+                du[1,1] = $(V[1])
+                du[2,1] = $(V[2])
+                du[1,2] = $(DV[1,1]) * u[1,2] + $(DV[1,2]) * u[2,2]
+                du[2,2] = $(DV[2,1]) * u[1,2] + $(DV[2,2]) * u[2,2]
+                du[1,3] = $(DV[1,1]) * u[1,3] + $(DV[1,2]) * u[2,3]
+                du[2,3] = $(DV[2,1]) * u[1,3] + $(DV[2,2]) * u[2,3]
+                return du
+            end,
+        )
+    end
+end
+macro var_velo!_from_stream(name::Symbol)
+    haskey(stream_dict, name) || (@error "stream $name not defined")
+    quote
+        @var_velo!_from_stream $(name) $(stream_dict[name])
     end
 end
 
@@ -341,10 +403,6 @@ simple_simplifier(expr) = expr
 
 
 expr_grad(expr, coord_vars::Vector{Symbol}) = expr_diff.(expr, coord_vars)
-function hessian(expr, coord_vars)
-    ∇expr = expr_grad(expr, coord_vars)
-    ∇²expr = expr_grad(expr)
-end
 
 ####t####################################################################################
 #                 Functions for symbolic manipulation of expressions                    #
