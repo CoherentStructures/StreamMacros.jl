@@ -52,8 +52,8 @@ using Test
     @test t2 isa ODEFunction{false}
     ω = @vorticity_from_stream test_stream
     @test ω(rand(), rand(), rand()) == 4
-    ct = @code_typed ω(rand(), rand(), rand())
-    @test ct.first.code[1] == :(return 4)
+    ct = code_typed(ω, (Float64, Float64, Float64))
+    @test first(ct).first.code[1] == :(return 4)
 
     @define_stream Ψ_rot_dgyre begin
         st          = window(t, 0, 1)*t^2*(3-2*t) + heaviside(t-1)
