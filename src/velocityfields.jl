@@ -19,9 +19,9 @@
     U₀ = 62.66e-6; L₀ = 1770e-3; r₀ = 6371e-3
 end
 bickleyJet = @velo_from_stream ψ_bickley
-bickleyJet! = ODE.ODEFunction{true}((du, u, p, t) -> du .= bickleyJet(u, p, t))
+bickleyJet! = @velo!_from_stream ψ_bickley
 bickleyJetEqVari = @var_velo_from_stream ψ_bickley
-bickleyJetEqVari! = ODE.ODEFunction{true}((DU, U, p, t) -> DU .= bickleyJetEqVari(U, p, t))
+bickleyJetEqVari! = @var_velo!_from_stream ψ_bickley
 
 # rotating double gyre flow  [Mosovsky & Meiss, 2011]
 @define_stream Ψ_rot_dgyre begin
@@ -32,6 +32,6 @@ bickleyJetEqVari! = ODE.ODEFunction{true}((DU, U, p, t) -> DU .= bickleyJetEqVar
     Ψ_rot_dgyre = (1-st) * Ψ_P + st * Ψ_F
 end
 rot_double_gyre = @velo_from_stream Ψ_rot_dgyre
-rot_double_gyre! = ODE.ODEFunction{true}((du, u, p, t) -> du .= rot_double_gyre(u, p, t))
+rot_double_gyre! = @velo!_from_stream Ψ_rot_dgyre
 rot_double_gyreEqVari = @var_velo_from_stream Ψ_rot_dgyre
-rot_double_gyreEqVari! = ODE.ODEFunction{true}((DU, U, p, t) -> DU .= rot_double_gyreEqVari(U, p, t))
+rot_double_gyreEqVari! = @var_velo!_from_stream Ψ_rot_dgyre
